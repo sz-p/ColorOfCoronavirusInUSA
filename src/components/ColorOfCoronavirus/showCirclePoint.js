@@ -6,7 +6,7 @@ const renderCirclePoint = function(params, api) {
 	const LineLength = 1;
 	const style = api.style({});
 
-	const key = (api.value(0) - 1.5) * 2 * Math.PI / api.value(1);
+	const key = (api.value(0) - 0.5) * 2 * Math.PI / api.value(1);
 	const cx = Math.cos(key) * (size + LineLength * api.value(2)) / 3 + width / 2;
 	const cy = Math.sin(key) * (size + LineLength * api.value(2)) / 3 + height / 2;
 	const x = Math.cos(key) * size / 3 + width / 2;
@@ -45,8 +45,8 @@ const renderCirclePoint = function(params, api) {
 };
 function getRenderData() {
 	const textRenderData = [];
-	for (let i = 0; i < ringXData.length * 4; i++) {
-		textRenderData.push([ i, ringXData.length * 4, parseInt(Math.random() * 100) ]);
+	for (let i = 0; i < ringXData.length * 2; i++) {
+		textRenderData.push([ i, ringXData.length * 2, parseInt(Math.random() * 100) ]);
 	}
 	return textRenderData;
 }
