@@ -1,78 +1,78 @@
-import { cityColorOfCoronavirusData } from './data';
-const renderCirclePin = function(params, api) {
+import { dataTotal } from './data';
+
+const renderCirclePoint = function(params, api) {
 	const width = api.getWidth();
 	const height = api.getHeight();
 	const size = Math.min(width, height);
-	const rangeLineLength = size * 0.3;
-	const baseLineLength = size * 0.1;
-	const baseR = size * 0.005;
-	const rangeR = size * 0.01;
-	const style = api.style({
-		fill: api.value(0) % 2 === 0 ? '#000' : '#fff',
-		stroke: api.value(0) % 2 === 0 ? '#000' : '#fff'
-	});
-	const index = api.value(0);
-	const dataLength = api.value(1);
-	const value = api.value(2);
-	const maxValue = api.value(3);
-	const k = value / maxValue;
+	let fill = undefined;
+	let stroke = undefined;
+	let cx = undefined;
+	let cy = undefined;
+	let r = undefined;
+	let z = undefined;
+	let populationBaseR = 50;
+	let deathBaseR = 20;
 
-	const key = (index - 0.5) * 2 * Math.PI / dataLength - Math.PI / 2;
-	const cx = Math.cos(key) * (size + baseLineLength + rangeLineLength * k) / 4 + width / 2;
-	const cy = Math.sin(key) * (size + baseLineLength + rangeLineLength * k) / 4 + height / 2;
-	const x = Math.cos(key) * size / 4 + width / 2;
-	const y = Math.sin(key) * size / 4 + height / 2;
+	if (api.value(2) === 'Black') stroke = '#000';
+	if (api.value(2) === 'White') stroke = '#fff';
+
+	if (api.value(2) === 'Black' && api.value(3) === 'population') {
+		fill = 'rgba(0,0,0,0.5)';
+		cx = width / 2 + size * 0.1;
+		cy = height / 2 + size * 0.1;
+		r = api.value(1) / api.value(4) * populationBaseR;
+		z = 1;
+	}
+	if (api.value(2) === 'Black' && api.value(3) === 'death') {
+		fill = 'rgba(0,0,0,1)';
+		cx = width / 2 + size * 0.11;
+		cy = height / 2 + size * 0.1;
+		r = api.value(1) / api.value(5) * deathBaseR;
+		z = 3;
+	}
+	if (api.value(2) === 'White' && api.value(3) === 'population') {
+		fill = 'rgba(255,255,255,0.5)';
+		cx = width / 2 - size * 0.09;
+		cy = height / 2 - size * 0.09;
+		r = api.value(1) / api.value(4) * populationBaseR;
+		z = 1;
+	}
+	if (api.value(2) === 'White' && api.value(3) === 'death') {
+		fill = 'rgba(255,255,255,1)';
+		cx = width / 2 - size * 0.08;
+		cy = height / 2 - size * 0.08;
+		r = api.value(1) / api.value(5) * deathBaseR;
+		z = 3;
+	}
+
+	const style = api.style({
+		fill,
+		stroke
+	});
 	return {
-		type: 'group',
-		children: [
-			{
-				silent: true,
-				type: 'line',
-				shape: {
-					x1: x,
-					y1: y,
-					x2: cx,
-					y2: cy
-				},
-				style: style
-			},
-			{
-				type: 'circle',
-				shape: {
-					cx,
-					cy,
-					r: baseR + rangeR * k
-				},
-				style: style
-			}
-		],
+		type: 'circle',
+		shape: {
+			cx,
+			cy,
+			r,
+			z
+		},
 		style: style
 	};
 };
 function getRenderData() {
 	const textRenderData = [];
-	for (let i = 0; i < cityColorOfCoronavirusData.length; i++) {
-		textRenderData.push([
-			2 * i,
-			cityColorOfCoronavirusData.length * 2,
-			cityColorOfCoronavirusData[i].black,
-			cityColorOfCoronavirusData[0].black
-		]);
-		textRenderData.push([
-			2 * i + 1,
-			cityColorOfCoronavirusData.length * 2,
-			cityColorOfCoronavirusData[i].white,
-			cityColorOfCoronavirusData[0].black
-		]);
+	for (let i = 0; i < dataTotal.length; i++) {
+		textRenderData.push([ i, dataTotal[i].value, dataTotal[i].name, dataTotal[i].type, 2694258, 4280 ]);
 	}
 	return textRenderData;
 }
-export const circlePinSeries = {
+export const circlePointSeries = {
+	name: 'circlePointSeries',
 	type: 'custom',
 	itemStyle: {
-		borderColor: '#fff',
 		borderWidth: 1
 	},
-	renderItem: renderCirclePin,
+	renderItem: renderCirclePoint,
 	data: getRenderData()
 };

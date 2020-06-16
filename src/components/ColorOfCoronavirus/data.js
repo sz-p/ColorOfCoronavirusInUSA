@@ -3,25 +3,13 @@ export const data = [
 		name: 'Black, African American',
 		label: '黑人',
 		population: 1849077,
-		death: 428
+		death: 4280
 	},
 	{
 		name: 'White',
 		label: '白人',
-		death: 424,
+		death: 4240,
 		population: 2694258
-	},
-	{
-		name: 'Asian',
-		label: '亚裔',
-		death: 112,
-		population: 1231790
-	},
-	{
-		name: 'Other',
-		label: '其他',
-		death: 70,
-		population: 174173
 	}
 ];
 const styleList = [
@@ -70,6 +58,28 @@ for (let i = 1; i <= data.length; i++) {
 		itemStyle: style
 	});
 }
+export const dataTotal = [
+	{
+		name: 'Black',
+		value: 1849077,
+		type: 'population'
+	},
+	{
+		name: 'White',
+		value: 2694258,
+		type: 'population'
+	},
+	{
+		name: 'Black',
+		value: 4280,
+		type: 'death'
+	},
+	{
+		name: 'White',
+		value: 4240,
+		type: 'death'
+	}
+];
 export let legendData = [
 	{
 		name: '黑人',
