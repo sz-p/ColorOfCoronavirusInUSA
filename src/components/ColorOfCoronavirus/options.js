@@ -4,8 +4,18 @@ import { circleSeries } from './showCircle';
 import { circleTextSeries } from './showCircleText';
 import { circlePinSeries } from './showCirclePin';
 import { circlePointSeries } from './showCirclePoint';
-
+import { legendSeries } from './showlegend';
 export const options = {
+	title: {
+		text: '  黑与白  \n  生与死  \n自由与民主',
+		textStyle: {
+			color: '#fff',
+			textAlign: 'center'
+		},
+		left: 'center',
+		top: '2%',
+		subtext: `数据来源APM实验室`
+	},
 	backgroundColor: 'rgb(25,39,66)',
 	yAxis,
 	xAxis,
@@ -48,6 +58,7 @@ export const options = {
 		circleSeries,
 		circleTextSeries,
 		circlePinSeries,
+		legendSeries,
 		// circlePointSeries
 		{
 			name: '人口',
