@@ -12,7 +12,7 @@ function ColorOfCoronavirus() {
   })
 
   return (
-    <div ref={couterRef} style={{ width: "500px", height: "500px" }}>
+    <div ref={couterRef} style={{ width: "800px", height: "800px" }}>
     </div>
   );
 }
