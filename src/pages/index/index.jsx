@@ -11,7 +11,6 @@ function IndexPage() {
       <div className={styles.helloword}>
         <ColorOfCoronavirus />
       </div>
-      <Link to={'/about'}>about</Link>
     </div>
   );
 }

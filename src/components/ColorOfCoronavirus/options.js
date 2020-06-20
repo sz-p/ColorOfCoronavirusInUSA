@@ -16,7 +16,7 @@ export const options = {
 		top: '2%',
 		subtext: `数据来源APM实验室`
 	},
-	backgroundColor: 'rgb(25,39,66)',
+	backgroundColor: 'rgb(55,55,55)',
 	yAxis,
 	xAxis,
 	grid: [
